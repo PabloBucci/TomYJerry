@@ -1,18 +1,26 @@
 /** First Wollok example */
 object tom {
-	var energia
+	var energia = 100
+	const energiaMinima = 12
+	const velocidadMinima = 5
 	
-	method comer(unRaton) {
-		return energia += (12 + unRaton.peso())
+	method energiaGanadaPorComer(unRaton) {
+		return energia += (energiaMinima + unRaton.peso())
 	}
 	
-	method velocidad() = 5 + energia/10
+	method comer(unRaton) 
+		energia += self.energiaGanadaPorComer(unRaton)
 	
-	method correr(metros) {
-		energia -= metros/2
-	}
+	
+	method velocidad() = velocidadMinima + energia/10
+	
+	method energiaConsumidaPorCorrer(distancia) = distancia/2
+	
+	method meConvieneComerRatonA(unRaton, unaDistancia) = self.energiaGanadaPorComer(unRaton) > self.energiaConsumidaPorCorrer(unaDistancia)
 }
 
 object jerry {
-	var peso
+	var peso = 150
+	
+	method peso() = peso
 }
